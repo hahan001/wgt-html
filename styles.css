@@ -84,7 +84,7 @@ body {
 
 .card-wrapper {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  flex: 1 1 0%;
+  flex: 1 1 238px;
   max-width: 240px;
   border-radius: 20px;
 }
@@ -94,9 +94,21 @@ body {
   margin-bottom: 30px;
 }
 
+.image-wrapper {
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-top: 100%; /* simulate the ratio is 1, because the design is not consistent between elements, and the ratio chooses the closest ratio to avoid unnecessary UI bugs if there are many images with different ratios later. */
+}
+
 img {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 .personal-position {
