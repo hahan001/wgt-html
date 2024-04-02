@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-text-color: 150 187 124;
+  --text-color: 37 43 66;
+  --secondary-text-color: 115 115 115;
+}
+
 html {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -14,6 +20,7 @@ html {
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+  color: rgb(var(--text-color));
 }
 
 body {
@@ -22,86 +29,61 @@ body {
   margin: auto;
 }
 
-.flex {
-  display: flex;
+.section-header {
+  margin-bottom: 112px;
+  animation: bounce 1s;
 }
 
-.flex-col {
-  flex-direction: column;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.font-bold {
+.section-header__name {
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(var(--primary-text-color));
   font-weight: 700;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.w-fit {
-  width: fit-content;
-}
-
-.text-primary {
-  color: #252B42;
-}
-
-.text-primary-2 {
-  color: #737373;
-}
-
-.text-secondary {
-  color: #96BB7C;
-}
-
-.section-header {
-  margin-bottom: 112px;
-}
-
-.section-name {
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.section-title {
+.section-header__title {
   margin: 10px 0;
+  font-weight: 700;
 }
 
-.section-description {
+.section-header__description {
   font-size: 14px;
   line-height: 20px;
+  color: rgb(var(--secondary-text-color))
 }
 
 .cards-container {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
+  animation: fade-in-right 1.5s ease-out;
 }
 
 .card-wrapper {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
   flex: 1 1 238px;
   max-width: 240px;
   border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.description-wrapper {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.card-wrapper:hover .card-wrapper__image-wrapper img {
+  transform: scale(1.2);
+  transition: all ease 0.3s;
 }
 
-.image-wrapper {
+.card-wrapper__image-wrapper {
   position: relative;
   height: 0;
   width: 100%;
   padding-top: 100%; /* simulate the ratio is 1, because the design is not consistent between elements, and the ratio chooses the closest ratio to avoid unnecessary UI bugs if there are many images with different ratios later. */
+  overflow: hidden;
 }
 
-img {
+.card-wrapper__image-wrapper img {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   top: 0;
@@ -111,42 +93,63 @@ img {
   position: absolute;
 }
 
-.personal-position {
+.card-detail {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.card-detail__member-name {
+  font-weight: 700;
+}
+
+.card-detail__member-position {
   font-size: 12px;
   line-height: 16px;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: rgb(var(--secondary-text-color));
 }
 
-.icon-wrapper {
+.card-detail__icon-wrapper {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 
-svg {
+.card-detail__icon-wrapper svg {
   font-size: 24px;
-  cursor: pointer;
+}
+
+@media (max-width: 1280px) {
+  body {
+    padding: 50px 80px;
+  }
 }
 
 
 @media (max-width: 1024px) {
-  body {
-    padding: 50px 100px;
-  }
   
   .section-header {
     margin-bottom: 80px;
   }
 
-  .section-title {
+  .section-header__title {
     margin: 4px 0;
     font-size: 14px;
     line-height: 16px;
   }
   
-  .section-description {
+  .section-header__description {
     font-size: 12px;
     line-height: 16px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    padding: 50px 40px;
   }
 }
 
@@ -165,38 +168,56 @@ svg {
     grid-template-columns: auto auto;
   }
 
-  img {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
   .card-wrapper {
     border-radius: 8px;
   }
 
-  .description-wrapper {
+  .card-wrapper__image-wrapper img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .card-detail {
     margin: 10px 0;
   }
 
-  img {
+  .card-wrapper__image-wrapper img {
     max-width: 100%;
   }
 
-  .member-name {
+  .card-detail__member-name {
     font-size: 14px;
     line-height: 20px;
   }
 
-  .personal-position {
+  .card-detail__member-position {
     margin: 5px 0;
   }
 
-  .icon-wrapper {
+  .card-detail__icon-wrapper {
     display: flex;
     gap: 8px;
   }
 
-  svg {
+  .card-detail__icon-wrapper svg {
     font-size: 16px;
   }
+}
+
+/* animation */
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-50px); }
+  100% { transform: translateY(0); }
 }
